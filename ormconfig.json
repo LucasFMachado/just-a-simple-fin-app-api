@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "docker",
+  "password": "docker",
+  "database": "just-a-simple-fin-app",
+  "entities": ["./src/modules/**/entities/*.ts"],
+  "migrations": ["./src/shared/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/database/migrations"
+  }
+}
