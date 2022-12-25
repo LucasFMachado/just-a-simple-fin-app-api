@@ -1,10 +1,9 @@
-import { Router } from 'express';
-
-import { CreateCategoryController } from '@modules/categories/useCases/createCategory/CreateCategoryController';
-import { DeleteCategoryController } from '@modules/categories/useCases/deleteCategory/DeleteCategoryController';
-import { GetAllCategoriesController } from '@modules/categories/useCases/getAllCategories/GetAllCategoriesController';
-import { GetOneCategoryController } from '@modules/categories/useCases/getOneCategory/GetOneCategoryController';
-import { UpdateCategoryController } from '@modules/categories/useCases/updateCategory/UpdateCategoryController';
+import { CreateCategoryController } from "@modules/categories/useCases/createCategory/CreateCategoryController";
+import { DeleteCategoryController } from "@modules/categories/useCases/deleteCategory/DeleteCategoryController";
+import { GetAllCategoriesController } from "@modules/categories/useCases/getAllCategories/GetAllCategoriesController";
+import { GetOneCategoryController } from "@modules/categories/useCases/getOneCategory/GetOneCategoryController";
+import { UpdateCategoryController } from "@modules/categories/useCases/updateCategory/UpdateCategoryController";
+import { Router } from "express";
 
 const categoryRoutes = Router();
 const createCategoryController = new CreateCategoryController();
@@ -13,26 +12,14 @@ const deleteCategoryController = new DeleteCategoryController();
 const getAllCategoriesController = new GetAllCategoriesController();
 const getOneCategoryController = new GetOneCategoryController();
 
-categoryRoutes.get('/', getAllCategoriesController.handle);
+categoryRoutes.get("/", getAllCategoriesController.handle);
 
-categoryRoutes.get(
-  '/:id',
-  getOneCategoryController.handle,
-);
+categoryRoutes.get("/:id", getOneCategoryController.handle);
 
-categoryRoutes.post(
-  '/',
-  createCategoryController.handle,
-);
+categoryRoutes.post("/", createCategoryController.handle);
 
-categoryRoutes.put(
-  '/:id',
-  updateCategoryController.handle,
-);
+categoryRoutes.put("/:id", updateCategoryController.handle);
 
-categoryRoutes.delete(
-  '/:id',
-  deleteCategoryController.handle,
-);
+categoryRoutes.delete("/:id", deleteCategoryController.handle);
 
 export { categoryRoutes };

@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { GetAllTypesService } from './GetAllTypesService';
+import { GetAllTypesService } from "./GetAllTypesService";
 
 class GetAllTypesController {
   async handle(request: Request, response: Response): Promise<Response> {

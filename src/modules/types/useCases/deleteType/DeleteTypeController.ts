@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { DeleteTypeService } from './DeleteTypeService';
+import { DeleteTypeService } from "./DeleteTypeService";
 
 class DeleteTypeController {
   async handle(request: Request, response: Response): Promise<Response> {

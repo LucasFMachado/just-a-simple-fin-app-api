@@ -1,11 +1,13 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import { typeRoutes } from './type';
-import { categoryRoutes } from './category';
+import { categoryRoutes } from "./category";
+import { transactionRoutes } from "./transaction";
+import { typeRoutes } from "./type";
 
 const routes = Router();
 
-routes.use('/type', typeRoutes);
-routes.use('/category', categoryRoutes);
+routes.use("/category", categoryRoutes);
+routes.use("/transaction", transactionRoutes);
+routes.use("/type", typeRoutes);
 
 export { routes };

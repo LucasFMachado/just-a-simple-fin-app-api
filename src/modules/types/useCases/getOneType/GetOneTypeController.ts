@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { GetOneTypeService } from './GetOneTypeService';
+import { GetOneTypeService } from "./GetOneTypeService";
 
 class GetOneTypeController {
   async handle(request: Request, response: Response): Promise<Response> {

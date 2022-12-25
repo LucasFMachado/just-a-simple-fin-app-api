@@ -1,13 +1,13 @@
-import { inject, injectable } from 'tsyringe';
+import { inject, injectable } from "tsyringe";
 
-import { Category } from '../../entities/Category';
-import { ICategoryRepository } from '../../repositories/ICategoryRepository';
+import { Category } from "../../entities/Category";
+import { ICategoryRepository } from "../../repositories/ICategoryRepository";
 
 @injectable()
 class GetOneCategoryService {
   constructor(
-    @inject('CategoryRepository')
-    private categoryRepository: ICategoryRepository,
+    @inject("CategoryRepository")
+    private categoryRepository: ICategoryRepository
   ) {}
 
   async execute(id: number): Promise<Category | undefined> {

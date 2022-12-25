@@ -1,12 +1,11 @@
-import { getRepository, Not, Repository } from 'typeorm';
+import { AppError } from "@shared/errors/AppError";
+import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { getRepository, Not, Repository } from "typeorm";
 
-import { AppError } from '@shared/errors/AppError';
-import { alreadyExistsMessage, notExistsMessage } from '@shared/messages';
-
-import { ICreateCategoryDto } from '../dtos/ICreateCategoryDto';
-import { IUpdateCategoryDto } from '../dtos/IUpdateCategoryDto';
-import { Category } from '../entities/Category';
-import { ICategoryRepository } from './ICategoryRepository';
+import { ICreateCategoryDto } from "../dtos/ICreateCategoryDto";
+import { IUpdateCategoryDto } from "../dtos/IUpdateCategoryDto";
+import { Category } from "../entities/Category";
+import { ICategoryRepository } from "./ICategoryRepository";
 
 class CategoryRepository implements ICategoryRepository {
   private repository: Repository<Category>;
@@ -19,7 +18,7 @@ class CategoryRepository implements ICategoryRepository {
     const category_already_exists = await this.findByTitle(title);
 
     if (category_already_exists) {
-      throw new AppError(alreadyExistsMessage('Category'));
+      throw new AppError(alreadyExistsMessage("Category"));
     }
 
     const category = this.repository.create({ title, type_id });
@@ -29,17 +28,22 @@ class CategoryRepository implements ICategoryRepository {
     return category;
   }
 
-  async update({ id, title, type_id, active }: IUpdateCategoryDto): Promise<Category> {
+  async update({
+    id,
+    title,
+    type_id,
+    active,
+  }: IUpdateCategoryDto): Promise<Category> {
     const category = await this.findById(id);
 
     if (!category) {
-      throw new AppError(notExistsMessage('Category'));
+      throw new AppError(notExistsMessage("Category"));
     }
 
     const category_already_exists = await this.findByExisting(id, title);
 
     if (category_already_exists) {
-      throw new AppError(alreadyExistsMessage('Category'));
+      throw new AppError(alreadyExistsMessage("Category"));
     }
 
     const updated_category = this.repository.create({
@@ -59,7 +63,7 @@ class CategoryRepository implements ICategoryRepository {
     const category = await this.findById(id);
 
     if (!category) {
-      throw new AppError(notExistsMessage('Category'));
+      throw new AppError(notExistsMessage("Category"));
     }
 
     const deleted_category = this.repository.create({
@@ -81,7 +85,7 @@ class CategoryRepository implements ICategoryRepository {
     const category = await this.findById(id);
 
     if (!category) {
-      throw new AppError(notExistsMessage('Category'));
+      throw new AppError(notExistsMessage("Category"));
     }
 
     return category;
@@ -103,7 +107,7 @@ class CategoryRepository implements ICategoryRepository {
 
   private async findByExisting(
     id: number,
-    title: string,
+    title: string
   ): Promise<Category | undefined> {
     const category = await this.repository.findOne({
       id: Not(id),

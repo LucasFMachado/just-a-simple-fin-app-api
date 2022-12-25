@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { UpdateCategoryService } from './UpdateCategoryService';
+import { UpdateCategoryService } from "./UpdateCategoryService";
 
 class UpdateCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {

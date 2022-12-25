@@ -1,4 +1,4 @@
-import { Type } from '@modules/types/entities/Type';
+import { Type } from "@modules/types/entities/Type";
 import {
   Column,
   CreateDateColumn,
@@ -7,9 +7,9 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('categories')
+@Entity("categories")
 class Category {
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,9 +21,8 @@ class Category {
   type_id: number;
 
   @ManyToOne(() => Type)
-  @JoinColumn({ name: 'type_id' })
+  @JoinColumn({ name: "type_id" })
   type: Type;
-
 
   @Column()
   active: boolean;

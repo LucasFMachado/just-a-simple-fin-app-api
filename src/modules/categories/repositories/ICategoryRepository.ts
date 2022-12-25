@@ -1,6 +1,6 @@
-import { ICreateCategoryDto } from '../dtos/ICreateCategoryDto';
-import { IUpdateCategoryDto } from '../dtos/IUpdateCategoryDto';
-import { Category } from '../entities/Category';
+import { ICreateCategoryDto } from "../dtos/ICreateCategoryDto";
+import { IUpdateCategoryDto } from "../dtos/IUpdateCategoryDto";
+import { Category } from "../entities/Category";
 
 interface ICategoryRepository {
   create(data: ICreateCategoryDto): Promise<Category>;

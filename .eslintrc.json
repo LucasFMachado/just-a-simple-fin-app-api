@@ -13,8 +13,20 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier",
+        "react",
+        "simple-import-sort"
     ],
     "rules": {
+        "camelcase": "off",
+        "import/no-duplicates": "off",
+        "prettier/prettier": "error",
+        "react/react-in-jsx-scope": "off",
+        "space-before-function-paren": "off",
+        "comma-dangle": "off",
+        "multiline-ternary": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error"
     }
 }

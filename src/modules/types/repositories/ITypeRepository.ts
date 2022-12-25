@@ -1,6 +1,6 @@
-import { ICreateTypeDto } from '../dtos/ICreateTypeDto';
-import { IUpdateTypeDto } from '../dtos/IUpdateTypeDto';
-import { Type } from '../entities/Type';
+import { ICreateTypeDto } from "../dtos/ICreateTypeDto";
+import { IUpdateTypeDto } from "../dtos/IUpdateTypeDto";
+import { Type } from "../entities/Type";
 
 interface ITypeRepository {
   create(data: ICreateTypeDto): Promise<Type>;

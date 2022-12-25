@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { CreateTypeService } from './CreateTypeService';
+import { CreateTypeService } from "./CreateTypeService";
 
 class CreateTypeController {
   async handle(request: Request, response: Response): Promise<Response> {

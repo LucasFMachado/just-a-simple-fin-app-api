@@ -4,9 +4,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('types')
+@Entity("types")
 class Type {
   @PrimaryGeneratedColumn()
   id: number;

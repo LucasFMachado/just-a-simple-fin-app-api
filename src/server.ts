@@ -1,13 +1,12 @@
-import 'reflect-metadata';
-import 'express-async-errors';
-import './shared/containers';
+import "reflect-metadata";
+import "express-async-errors";
+import "./shared/containers";
 
-import cors from 'cors';
-import express, { NextFunction, Request, Response } from 'express';
-
-import createConnection from '@shared/database';
-import { AppError } from '@shared/errors/AppError';
-import { routes } from '@shared/routes';
+import createConnection from "@shared/database";
+import { AppError } from "@shared/errors/AppError";
+import { routes } from "@shared/routes";
+import cors from "cors";
+import express, { NextFunction, Request, Response } from "express";
 
 createConnection();
 const app = express();
@@ -27,10 +26,10 @@ app.use(
     }
 
     return response.status(500).json({
-      status: 'error',
+      status: "error",
       message: `Internal server error: ${err.message}`,
     });
-  },
+  }
 );
 
-app.listen(3333, () => console.log('Server is running!'));
+app.listen(3333, () => console.log("Server is running!"));

@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import { Request, Response } from "express";
+import { container } from "tsyringe";
 
-import { CreateCategoryService } from './CreateCategoryService';
+import { CreateCategoryService } from "./CreateCategoryService";
 
 class CreateCategoryController {
   async handle(request: Request, response: Response): Promise<Response> {

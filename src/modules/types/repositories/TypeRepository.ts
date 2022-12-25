@@ -1,12 +1,11 @@
-import { getRepository, Not, Repository } from 'typeorm';
+import { AppError } from "@shared/errors/AppError";
+import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { getRepository, Not, Repository } from "typeorm";
 
-import { AppError } from '@shared/errors/AppError';
-import { alreadyExistsMessage, notExistsMessage } from '@shared/messages';
-
-import { ICreateTypeDto } from '../dtos/ICreateTypeDto';
-import { IUpdateTypeDto } from '../dtos/IUpdateTypeDto';
-import { Type } from '../entities/Type';
-import { ITypeRepository } from './ITypeRepository';
+import { ICreateTypeDto } from "../dtos/ICreateTypeDto";
+import { IUpdateTypeDto } from "../dtos/IUpdateTypeDto";
+import { Type } from "../entities/Type";
+import { ITypeRepository } from "./ITypeRepository";
 
 class TypeRepository implements ITypeRepository {
   private repository: Repository<Type>;
@@ -19,7 +18,7 @@ class TypeRepository implements ITypeRepository {
     const type_already_exists = await this.findByTitle(title);
 
     if (type_already_exists) {
-      throw new AppError(alreadyExistsMessage('Type'));
+      throw new AppError(alreadyExistsMessage("Type"));
     }
 
     const type = this.repository.create({ title });
@@ -33,13 +32,13 @@ class TypeRepository implements ITypeRepository {
     const type = await this.findById(id);
 
     if (!type) {
-      throw new AppError(notExistsMessage('Type'));
+      throw new AppError(notExistsMessage("Type"));
     }
 
     const type_already_exists = await this.findByExisting(id, title);
 
     if (type_already_exists) {
-      throw new AppError(alreadyExistsMessage('Type'));
+      throw new AppError(alreadyExistsMessage("Type"));
     }
 
     const updated_type = this.repository.create({
@@ -58,7 +57,7 @@ class TypeRepository implements ITypeRepository {
     const type = await this.findById(id);
 
     if (!type) {
-      throw new AppError(notExistsMessage('Type'));
+      throw new AppError(notExistsMessage("Type"));
     }
 
     const deleted_type = this.repository.create({
@@ -80,7 +79,7 @@ class TypeRepository implements ITypeRepository {
     const type = await this.findById(id);
 
     if (!type) {
-      throw new AppError(notExistsMessage('Type'));
+      throw new AppError(notExistsMessage("Type"));
     }
 
     return type;
@@ -102,7 +101,7 @@ class TypeRepository implements ITypeRepository {
 
   private async findByExisting(
     id: number,
-    title: string,
+    title: string
   ): Promise<Type | undefined> {
     const type = await this.repository.findOne({
       id: Not(id),
