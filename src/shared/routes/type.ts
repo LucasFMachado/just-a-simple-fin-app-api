@@ -3,6 +3,11 @@ import { DeleteTypeController } from "@modules/types/useCases/deleteType/DeleteT
 import { GetAllTypesController } from "@modules/types/useCases/getAllTypes/GetAllTypesController";
 import { GetOneTypeController } from "@modules/types/useCases/getOneType/GetOneTypeController";
 import { UpdateTypeController } from "@modules/types/useCases/updateType/UpdateTypeController";
+import { createTypeSchema } from "@modules/types/validations/CreateTypeSchema";
+import { deleteTypeSchema } from "@modules/types/validations/DeleteTypeSchema";
+import { getOneTypeSchema } from "@modules/types/validations/GetOneTypeSchema";
+import { updateTypeSchema } from "@modules/types/validations/UpdateTypeSchema";
+import { validateFields } from "@shared/middlewares/validateFields";
 import { Router } from "express";
 
 const typeRoutes = Router();
@@ -14,12 +19,28 @@ const getOneTypesController = new GetOneTypeController();
 
 typeRoutes.get("/", getAllTypesController.handle);
 
-typeRoutes.get("/:id", getOneTypesController.handle);
+typeRoutes.get(
+  "/:id",
+  validateFields(getOneTypeSchema),
+  getOneTypesController.handle
+);
 
-typeRoutes.post("/", createTypeController.handle);
+typeRoutes.post(
+  "/",
+  validateFields(createTypeSchema),
+  createTypeController.handle
+);
 
-typeRoutes.put("/:id", updateTypeController.handle);
+typeRoutes.put(
+  "/:id",
+  validateFields(updateTypeSchema),
+  updateTypeController.handle
+);
 
-typeRoutes.delete("/:id", deleteTypeController.handle);
+typeRoutes.delete(
+  "/:id",
+  validateFields(deleteTypeSchema),
+  deleteTypeController.handle
+);
 
 export { typeRoutes };
