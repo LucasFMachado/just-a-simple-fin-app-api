@@ -11,6 +11,7 @@ import { createUserSchema } from "@modules/users/validations/CreateUserSchema";
 import { deleteUserSchema } from "@modules/users/validations/DeleteUserSchema";
 import { getOneUserSchema } from "@modules/users/validations/GetOneUserSchema";
 import { updateUserSchema } from "@modules/users/validations/UpdateUserSchema";
+import { ensureAuthenticated } from "@shared/middlewares/ensureAuthenticated";
 import { Router } from "express";
 
 import { validateFields } from "../middlewares/validateFields";
@@ -24,10 +25,17 @@ const getOneUserController = new GetOneUserController();
 const changePasswordController = new ChangePasswordController();
 const authenticateUserController = new AuthenticateUserController();
 
-userRoutes.get("/", getAllUsersController.handle);
+userRoutes.post(
+  "/authenticate",
+  validateFields(authenticateUserSchema),
+  authenticateUserController.handle
+);
+
+userRoutes.get("/", ensureAuthenticated, getAllUsersController.handle);
 
 userRoutes.get(
   "/:id",
+  ensureAuthenticated,
   validateFields(getOneUserSchema),
   getOneUserController.handle
 );
@@ -40,26 +48,23 @@ userRoutes.post(
 
 userRoutes.put(
   "/:id",
+  ensureAuthenticated,
   validateFields(updateUserSchema),
   updateUserController.handle
 );
 
 userRoutes.delete(
   "/:id",
+  ensureAuthenticated,
   validateFields(deleteUserSchema),
   deleteUserController.handle
 );
 
 userRoutes.put(
   "/change_password/:id",
+  ensureAuthenticated,
   validateFields(changePasswordSchema),
   changePasswordController.handle
-);
-
-userRoutes.post(
-  "/authenticate",
-  validateFields(authenticateUserSchema),
-  authenticateUserController.handle
 );
 
 export { userRoutes };

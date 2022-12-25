@@ -118,9 +118,9 @@ class UserRepository implements IUserRepository {
       throw new AppError(authErrorMessage());
     }
 
-    const token = sign({}, "e499b0d9d2e83e851a1cba7b2ddc22a8", {
+    const token = sign({}, "2025f8da49d9908e4ac2156a0d705eaa", {
       subject: user.id.toString(),
-      expiresIn: "7d",
+      expiresIn: "30d",
     });
 
     return {

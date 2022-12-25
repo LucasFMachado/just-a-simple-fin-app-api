@@ -7,6 +7,7 @@ import { createCategorySchema } from "@modules/categories/validations/CreateCate
 import { deleteCategorySchema } from "@modules/categories/validations/DeleteCategorySchema";
 import { getOneCategorySchema } from "@modules/categories/validations/GetOneCategorySchema";
 import { updateCategorySchema } from "@modules/categories/validations/UpdateCategorySchema";
+import { ensureAuthenticated } from "@shared/middlewares/ensureAuthenticated";
 import { validateFields } from "@shared/middlewares/validateFields";
 import { Router } from "express";
 
@@ -16,6 +17,8 @@ const updateCategoryController = new UpdateCategoryController();
 const deleteCategoryController = new DeleteCategoryController();
 const getAllCategoriesController = new GetAllCategoriesController();
 const getOneCategoryController = new GetOneCategoryController();
+
+categoryRoutes.use(ensureAuthenticated);
 
 categoryRoutes.get("/", getAllCategoriesController.handle);
 

@@ -7,6 +7,7 @@ import { createTypeSchema } from "@modules/types/validations/CreateTypeSchema";
 import { deleteTypeSchema } from "@modules/types/validations/DeleteTypeSchema";
 import { getOneTypeSchema } from "@modules/types/validations/GetOneTypeSchema";
 import { updateTypeSchema } from "@modules/types/validations/UpdateTypeSchema";
+import { ensureAuthenticated } from "@shared/middlewares/ensureAuthenticated";
 import { validateFields } from "@shared/middlewares/validateFields";
 import { Router } from "express";
 
@@ -16,6 +17,8 @@ const updateTypeController = new UpdateTypeController();
 const deleteTypeController = new DeleteTypeController();
 const getAllTypesController = new GetAllTypesController();
 const getOneTypesController = new GetOneTypeController();
+
+typeRoutes.use(ensureAuthenticated);
 
 typeRoutes.get("/", getAllTypesController.handle);
 
