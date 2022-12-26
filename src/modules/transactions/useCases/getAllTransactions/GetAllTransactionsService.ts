@@ -1,3 +1,5 @@
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { inject, injectable } from "tsyringe";
 
 import { Transaction } from "../../entities/Transaction";
@@ -10,8 +12,14 @@ class GetAllTransactionsService {
     private transactionRepository: ITransactionRepository
   ) {}
 
-  async execute(): Promise<Transaction[]> {
-    const transactions = await this.transactionRepository.getAll();
+  async execute({
+    page,
+    take,
+  }: IPagedQueryRequest): Promise<IPagedQueryReturn<Transaction>> {
+    const transactions = await this.transactionRepository.getAll({
+      page,
+      take,
+    });
     return transactions;
   }
 }

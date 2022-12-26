@@ -5,6 +5,8 @@ import {
   notExistsMessage,
   notMatchMessage,
 } from "@shared/messages";
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { hashPassword } from "@utils/password";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
@@ -25,9 +27,20 @@ class UserRepository implements IUserRepository {
     this.repository = getRepository(User);
   }
 
-  async getAll(): Promise<User[]> {
-    const users = await this.repository.find({ delete: false });
-    return users;
+  async getAll({
+    page,
+    take,
+  }: IPagedQueryRequest): Promise<IPagedQueryReturn<User>> {
+    const [users, count] = await this.repository.findAndCount({
+      where: { delete: false },
+      take: take,
+      skip: page * take,
+    });
+
+    return {
+      list: users,
+      count,
+    };
   }
 
   async getOne(id: number): Promise<User | undefined> {

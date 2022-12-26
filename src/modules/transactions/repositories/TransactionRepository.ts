@@ -1,5 +1,7 @@
 import { AppError } from "@shared/errors/AppError";
 import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { getRepository, Repository } from "typeorm";
 
 import { ICreateTransactionDto } from "../dtos/ICreateTransactionDto";
@@ -74,9 +76,20 @@ class TransactionRepository implements ITransactionRepository {
     return deleted_transaction;
   }
 
-  async getAll(): Promise<Transaction[]> {
-    const transactions = await this.repository.find({ delete: false });
-    return transactions;
+  async getAll({
+    page,
+    take,
+  }: IPagedQueryRequest): Promise<IPagedQueryReturn<Transaction>> {
+    const [transactions, count] = await this.repository.findAndCount({
+      where: { delete: false },
+      take: take,
+      skip: page * take,
+    });
+
+    return {
+      list: transactions,
+      count,
+    };
   }
 
   async getOne(id: number): Promise<Transaction | undefined> {

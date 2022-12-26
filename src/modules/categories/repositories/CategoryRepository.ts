@@ -1,5 +1,7 @@
 import { AppError } from "@shared/errors/AppError";
 import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { getRepository, Not, Repository } from "typeorm";
 
 import { ICreateCategoryDto } from "../dtos/ICreateCategoryDto";
@@ -76,9 +78,20 @@ class CategoryRepository implements ICategoryRepository {
     return deleted_category;
   }
 
-  async getAll(): Promise<Category[]> {
-    const categories = await this.repository.find({ delete: false });
-    return categories;
+  async getAll({
+    page,
+    take,
+  }: IPagedQueryRequest): Promise<IPagedQueryReturn<Category>> {
+    const [categories, count] = await this.repository.findAndCount({
+      where: { delete: false },
+      take: take,
+      skip: page * take,
+    });
+
+    return {
+      list: categories,
+      count,
+    };
   }
 
   async getOne(id: number): Promise<Category | undefined> {

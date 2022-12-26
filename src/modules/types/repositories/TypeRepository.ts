@@ -1,8 +1,10 @@
 import { AppError } from "@shared/errors/AppError";
 import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
 import { getRepository, Not, Repository } from "typeorm";
 
 import { ICreateTypeDto } from "../dtos/ICreateTypeDto";
+import { IPagedQueryReturn } from "../../../shared/interfaces/IPagedQueryReturn";
 import { IUpdateTypeDto } from "../dtos/IUpdateTypeDto";
 import { Type } from "../entities/Type";
 import { ITypeRepository } from "./ITypeRepository";
@@ -70,9 +72,20 @@ class TypeRepository implements ITypeRepository {
     return deleted_type;
   }
 
-  async getAll(): Promise<Type[]> {
-    const types = await this.repository.find({ delete: false });
-    return types;
+  async getAll({
+    page,
+    take,
+  }: IPagedQueryRequest): Promise<IPagedQueryReturn<Type>> {
+    const [types, count] = await this.repository.findAndCount({
+      where: { delete: false },
+      take: take,
+      skip: page * take,
+    });
+
+    return {
+      list: types,
+      count,
+    };
   }
 
   async getOne(id: number): Promise<Type | undefined> {
