@@ -1,12 +1,12 @@
 import { AppError } from "@shared/errors/AppError";
+import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import {
   alreadyExistsMessage,
   authErrorMessage,
   notExistsMessage,
   notMatchMessage,
 } from "@shared/messages";
-import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
-import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { hashPassword } from "@utils/password";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
@@ -131,7 +131,7 @@ class UserRepository implements IUserRepository {
       throw new AppError(authErrorMessage());
     }
 
-    const token = sign({}, "2025f8da49d9908e4ac2156a0d705eaa", {
+    const token = sign({}, process.env.SECRET_KEY as string, {
       subject: user.id.toString(),
       expiresIn: "30d",
     });
@@ -175,7 +175,7 @@ class UserRepository implements IUserRepository {
   }
 
   async findById(id: number): Promise<User | undefined> {
-    const user = await this.repository.findOne(id);
+    const user = await this.repository.findOne({ id, delete: false });
     return user;
   }
 
@@ -184,7 +184,7 @@ class UserRepository implements IUserRepository {
   */
 
   private async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.repository.findOne({ email });
+    const user = await this.repository.findOne({ email, delete: false });
     return user;
   }
 

@@ -1,7 +1,7 @@
 import { AppError } from "@shared/errors/AppError";
-import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
 import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
+import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
 import { getRepository, Repository } from "typeorm";
 
 import { ICreateTransactionDto } from "../dtos/ICreateTransactionDto";
@@ -107,12 +107,12 @@ class TransactionRepository implements ITransactionRepository {
   */
 
   private async findById(id: number): Promise<Transaction | undefined> {
-    const transaction = await this.repository.findOne(id);
+    const transaction = await this.repository.findOne({ id, delete: false });
     return transaction;
   }
 
   private async findByTitle(title: string): Promise<Transaction | undefined> {
-    const transaction = await this.repository.findOne({ title });
+    const transaction = await this.repository.findOne({ title, delete: false });
     return transaction;
   }
 }

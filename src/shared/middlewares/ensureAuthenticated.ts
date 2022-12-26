@@ -24,11 +24,11 @@ export async function ensureAuthenticated(
   try {
     const { sub: user_id } = verify(
       token,
-      "2025f8da49d9908e4ac2156a0d705eaa"
+      process.env.SECRET_KEY as string
     ) as ITokenPayload;
 
     const userRepository = new UserRepository();
-    const user = userRepository.findById(+user_id);
+    const user = await userRepository.findById(+user_id);
 
     if (!user) {
       throw new AppError("User does not exists!", 401);

@@ -109,12 +109,12 @@ class CategoryRepository implements ICategoryRepository {
   */
 
   private async findById(id: number): Promise<Category | undefined> {
-    const category = await this.repository.findOne(id);
+    const category = await this.repository.findOne({ id, delete: false });
     return category;
   }
 
   private async findByTitle(title: string): Promise<Category | undefined> {
-    const category = await this.repository.findOne({ title });
+    const category = await this.repository.findOne({ title, delete: false });
     return category;
   }
 

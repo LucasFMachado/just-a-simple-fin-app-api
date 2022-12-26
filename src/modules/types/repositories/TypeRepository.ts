@@ -103,12 +103,12 @@ class TypeRepository implements ITypeRepository {
   */
 
   private async findById(id: number): Promise<Type | undefined> {
-    const type = await this.repository.findOne(id);
+    const type = await this.repository.findOne({ id, delete: false });
     return type;
   }
 
   private async findByTitle(title: string): Promise<Type | undefined> {
-    const type = await this.repository.findOne({ title });
+    const type = await this.repository.findOne({ title, delete: false });
     return type;
   }
 
