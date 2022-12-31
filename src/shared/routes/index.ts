@@ -7,9 +7,9 @@ import { userRoutes } from "./user";
 
 const routes = Router();
 
-routes.use("/category", categoryRoutes);
-routes.use("/transaction", transactionRoutes);
-routes.use("/type", typeRoutes);
-routes.use("/user", userRoutes);
+routes.use("/categories", categoryRoutes);
+routes.use("/transactions", transactionRoutes);
+routes.use("/types", typeRoutes);
+routes.use("/users", userRoutes);
 
 export { routes };

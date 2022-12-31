@@ -3,6 +3,7 @@ import { ChangePasswordController } from "@modules/users/useCases/changePassword
 import { CreateUserController } from "@modules/users/useCases/createUser/CreateUserController";
 import { DeleteUserController } from "@modules/users/useCases/deleteUser/DeleteUserController";
 import { GetAllUsersController } from "@modules/users/useCases/getAllUsers/GetAllUsersController";
+import { GetMyUserController } from "@modules/users/useCases/getMyUser/GetMyUserController";
 import { GetOneUserController } from "@modules/users/useCases/getOneUser/GetOneUserController";
 import { UpdateUserController } from "@modules/users/useCases/updateUser/UpdateUserController";
 import { authenticateUserSchema } from "@modules/users/validations/AuthenticateUserSchema";
@@ -22,6 +23,7 @@ const updateUserController = new UpdateUserController();
 const deleteUserController = new DeleteUserController();
 const getAllUsersController = new GetAllUsersController();
 const getOneUserController = new GetOneUserController();
+const getMyUserController = new GetMyUserController();
 const changePasswordController = new ChangePasswordController();
 const authenticateUserController = new AuthenticateUserController();
 
@@ -32,6 +34,8 @@ userRoutes.post(
 );
 
 userRoutes.get("/", ensureAuthenticated, getAllUsersController.handle);
+
+userRoutes.get("/me", ensureAuthenticated, getMyUserController.handle);
 
 userRoutes.get(
   "/:id",

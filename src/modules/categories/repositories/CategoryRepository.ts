@@ -1,7 +1,7 @@
 import { AppError } from "@shared/errors/AppError";
-import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
 import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
+import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
 import { getRepository, Not, Repository } from "typeorm";
 
 import { ICreateCategoryDto } from "../dtos/ICreateCategoryDto";
