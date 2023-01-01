@@ -1,5 +1,5 @@
-import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { inject, injectable } from "tsyringe";
 
 import { Type } from "../../entities/Type";

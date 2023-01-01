@@ -2,6 +2,7 @@ import { CreateTypeController } from "@modules/types/useCases/createType/CreateT
 import { DeleteTypeController } from "@modules/types/useCases/deleteType/DeleteTypeController";
 import { GetAllTypesController } from "@modules/types/useCases/getAllTypes/GetAllTypesController";
 import { GetOneTypeController } from "@modules/types/useCases/getOneType/GetOneTypeController";
+import { GetTypeOptionsController } from "@modules/types/useCases/getTypeOptions/GetTypeOptionsController";
 import { UpdateTypeController } from "@modules/types/useCases/updateType/UpdateTypeController";
 import { createTypeSchema } from "@modules/types/validations/CreateTypeSchema";
 import { deleteTypeSchema } from "@modules/types/validations/DeleteTypeSchema";
@@ -17,10 +18,13 @@ const updateTypeController = new UpdateTypeController();
 const deleteTypeController = new DeleteTypeController();
 const getAllTypesController = new GetAllTypesController();
 const getOneTypesController = new GetOneTypeController();
+const getTypeOptionsController = new GetTypeOptionsController();
 
 typeRoutes.use(ensureAuthenticated);
 
 typeRoutes.get("/", getAllTypesController.handle);
+
+typeRoutes.get("/options", getTypeOptionsController.handle);
 
 typeRoutes.get(
   "/:id",

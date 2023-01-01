@@ -1,3 +1,4 @@
+import { IOptionQueryReturn } from "@shared/interfaces/IOptionQueryReturn";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
 import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 
@@ -11,6 +12,7 @@ interface ICategoryRepository {
   delete(id: number): Promise<Category>;
   getAll(data: IPagedQueryRequest): Promise<IPagedQueryReturn<Category>>;
   getOne(id: number): Promise<Category | undefined>;
+  getOptions(): Promise<IOptionQueryReturn[]>;
 }
 
 export { ICategoryRepository };

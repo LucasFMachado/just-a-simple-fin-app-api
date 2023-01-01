@@ -65,7 +65,7 @@ userRoutes.delete(
 );
 
 userRoutes.put(
-  "/change_password/:id",
+  "/change-password/:id",
   ensureAuthenticated,
   validateFields(changePasswordSchema),
   changePasswordController.handle

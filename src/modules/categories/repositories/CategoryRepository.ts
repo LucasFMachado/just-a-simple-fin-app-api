@@ -1,4 +1,5 @@
 import { AppError } from "@shared/errors/AppError";
+import { IOptionQueryReturn } from "@shared/interfaces/IOptionQueryReturn";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
 import { IPagedQueryReturn } from "@shared/interfaces/IPagedQueryReturn";
 import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
@@ -102,6 +103,20 @@ class CategoryRepository implements ICategoryRepository {
     }
 
     return category;
+  }
+
+  async getOptions(): Promise<IOptionQueryReturn[]> {
+    const categories = await this.repository.find({
+      where: { delete: false, active: true },
+      select: ["id", "title"],
+    });
+
+    const options = categories.map((option) => ({
+      value: String(option.id),
+      label: option.title,
+    }));
+
+    return options;
   }
 
   /*

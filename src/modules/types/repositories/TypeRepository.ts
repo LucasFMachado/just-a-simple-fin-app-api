@@ -1,10 +1,11 @@
 import { AppError } from "@shared/errors/AppError";
-import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
+import { IOptionQueryReturn } from "@shared/interfaces/IOptionQueryReturn";
 import { IPagedQueryRequest } from "@shared/interfaces/IPagedQueryRequest";
+import { alreadyExistsMessage, notExistsMessage } from "@shared/messages";
 import { getRepository, Not, Repository } from "typeorm";
 
-import { ICreateTypeDto } from "../dtos/ICreateTypeDto";
 import { IPagedQueryReturn } from "../../../shared/interfaces/IPagedQueryReturn";
+import { ICreateTypeDto } from "../dtos/ICreateTypeDto";
 import { IUpdateTypeDto } from "../dtos/IUpdateTypeDto";
 import { Type } from "../entities/Type";
 import { ITypeRepository } from "./ITypeRepository";
@@ -96,6 +97,20 @@ class TypeRepository implements ITypeRepository {
     }
 
     return type;
+  }
+
+  async getOptions(): Promise<IOptionQueryReturn[]> {
+    const types = await this.repository.find({
+      where: { delete: false, active: true },
+      select: ["id", "title"],
+    });
+
+    const options = types.map((option) => ({
+      value: String(option.id),
+      label: option.title,
+    }));
+
+    return options;
   }
 
   /*

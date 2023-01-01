@@ -1,6 +1,7 @@
 import { CreateCategoryController } from "@modules/categories/useCases/createCategory/CreateCategoryController";
 import { DeleteCategoryController } from "@modules/categories/useCases/deleteCategory/DeleteCategoryController";
 import { GetAllCategoriesController } from "@modules/categories/useCases/getAllCategories/GetAllCategoriesController";
+import { GetCategoryOptionsController } from "@modules/categories/useCases/getCategoryOptions/GetCategoryOptionsController";
 import { GetOneCategoryController } from "@modules/categories/useCases/getOneCategory/GetOneCategoryController";
 import { UpdateCategoryController } from "@modules/categories/useCases/updateCategory/UpdateCategoryController";
 import { createCategorySchema } from "@modules/categories/validations/CreateCategorySchema";
@@ -17,10 +18,13 @@ const updateCategoryController = new UpdateCategoryController();
 const deleteCategoryController = new DeleteCategoryController();
 const getAllCategoriesController = new GetAllCategoriesController();
 const getOneCategoryController = new GetOneCategoryController();
+const getCategoryOptionsController = new GetCategoryOptionsController();
 
 categoryRoutes.use(ensureAuthenticated);
 
 categoryRoutes.get("/", getAllCategoriesController.handle);
+
+categoryRoutes.get("/options", getCategoryOptionsController.handle);
 
 categoryRoutes.get(
   "/:id",
