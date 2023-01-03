@@ -19,4 +19,6 @@ app.use(routes);
 
 app.use(errorsMananger);
 
-app.listen(3333, () => console.log("Server is running!"));
+app.listen(process.env.NODE_PORT || 3333, () =>
+  console.log("Server is running!")
+);
