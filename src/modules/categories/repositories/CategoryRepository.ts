@@ -85,6 +85,7 @@ class CategoryRepository implements ICategoryRepository {
   }: IPagedQueryRequest): Promise<IPagedQueryReturn<Category>> {
     const [categories, count] = await this.repository.findAndCount({
       where: { delete: false },
+      relations: ["type"],
       take: take,
       skip: page * take,
     });
@@ -124,7 +125,10 @@ class CategoryRepository implements ICategoryRepository {
   */
 
   private async findById(id: number): Promise<Category | undefined> {
-    const category = await this.repository.findOne({ id, delete: false });
+    const category = await this.repository.findOne({
+      where: { id, delete: false },
+      relations: ["type"],
+    });
     return category;
   }
 
