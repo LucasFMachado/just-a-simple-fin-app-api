@@ -21,7 +21,7 @@
     "rules": {
         "camelcase": "off",
         "import/no-duplicates": "off",
-        "prettier/prettier": "error",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
         "react/react-in-jsx-scope": "off",
         "space-before-function-paren": "off",
         "comma-dangle": "off",
