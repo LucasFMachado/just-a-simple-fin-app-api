@@ -1,7 +1,7 @@
 require("dotenv/config");
 
-const node_env_folder = process.env.NODE_ENV === "production" ? "dist" : "src";
-const node_file_extension = process.env.NODE_ENV === "production" ? "js" : "ts";
+const node_env_folder = process.env.ENV === "production" ? "dist" : "src";
+const node_file_extension = process.env.ENV === "production" ? "js" : "ts";
 
 module.exports = {
   type: "postgres",
