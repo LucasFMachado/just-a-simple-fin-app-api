@@ -10,7 +10,7 @@ class GetAllTypesController {
     const getAllTypesService = container.resolve(GetAllTypesService);
 
     const types = await getAllTypesService.execute({
-      page: Number(page) || 0,
+      page: Number(page) || 1,
       take: Number(take) || 10,
     });
 

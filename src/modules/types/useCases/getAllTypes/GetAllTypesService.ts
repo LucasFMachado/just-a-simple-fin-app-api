@@ -16,7 +16,7 @@ class GetAllTypesService {
     page,
     take,
   }: IPagedQueryRequest): Promise<IPagedQueryReturn<Type>> {
-    const types = await this.typeRepository.getAll({ page, take });
+    const types = await this.typeRepository.getAll({ page: page - 1, take });
     return types;
   }
 }

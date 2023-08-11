@@ -10,7 +10,7 @@ class GetAllCategoriesController {
     const getAllCategoriesService = container.resolve(GetAllCategoriesService);
 
     const categories = await getAllCategoriesService.execute({
-      page: Number(page) || 0,
+      page: Number(page) || 1,
       take: Number(take) || 10,
     });
 

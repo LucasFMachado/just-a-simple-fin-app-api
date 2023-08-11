@@ -12,7 +12,7 @@ class GetAllTransactionsController {
     );
 
     const transactions = await getAllTransactionsService.execute({
-      page: Number(page) || 0,
+      page: Number(page) || 1,
       take: Number(take) || 10,
     });
 

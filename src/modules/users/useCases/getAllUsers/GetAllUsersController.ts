@@ -10,7 +10,7 @@ class GetAllUsersController {
     const getAllUsersService = container.resolve(GetAllUsersService);
 
     const users = await getAllUsersService.execute({
-      page: Number(page) || 0,
+      page: Number(page) || 1,
       take: Number(take) || 10,
     });
 

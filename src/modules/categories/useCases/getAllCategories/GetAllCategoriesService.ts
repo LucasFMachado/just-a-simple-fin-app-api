@@ -16,7 +16,10 @@ class GetAllCategoriesService {
     page,
     take,
   }: IPagedQueryRequest): Promise<IPagedQueryReturn<Category>> {
-    const categories = await this.categoryRepository.getAll({ page, take });
+    const categories = await this.categoryRepository.getAll({
+      page: page - 1,
+      take,
+    });
     return categories;
   }
 }

@@ -17,7 +17,7 @@ class GetAllTransactionsService {
     take,
   }: IPagedQueryRequest): Promise<IPagedQueryReturn<Transaction>> {
     const transactions = await this.transactionRepository.getAll({
-      page,
+      page: page - 1,
       take,
     });
     return transactions;

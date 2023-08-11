@@ -16,7 +16,7 @@ class GetAllUsersService {
     page,
     take,
   }: IPagedQueryRequest): Promise<IPagedQueryReturn<User>> {
-    const users = await this.userRepository.getAll({ page, take });
+    const users = await this.userRepository.getAll({ page: page - 1, take });
     return users;
   }
 }
